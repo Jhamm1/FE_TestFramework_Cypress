@@ -1,0 +1,77 @@
+1-a
+
+Testowaną aplikacją w trakcie tego szkolenia będzie kanoniczna implementacja Todo MVC.
+Jej klony w różnych wersjach można znaleźć na stronie http://todomvc.com.
+Ta konkretna implementacja nie zawiera żadnej metody persystencji dlatego też każdorazowo kiedy odświeżamy stronę lista zadań będzie pusta.
+Ułatwi nam to zadanie testowania i choć większość aplikacji nie zachowuje się w taki sposób to w celach dydaktycznych takie zachowanie będzie dla nas pożądane.
+
+W aplikacji tej mamy możliwość dodawania nowych zadań wpisując w pole tekst i zatwierdzając wartość za pomocą klawisza Enter.
+Pole, którego używamy do dodania nowego zadania ma klasę new-todo.
+
+Dodane zadanie możemy oznaczyć jako zakończone klikając w ikonkę po lewej stronie dodanego wcześniej zadania.
+
+Dodane zadanie możemy również usunąć klikając na ikonkę z krzyżykiem pojawiającą się po prawej stronie zadania.
+
+1-b
+
+Zacznijmy od dodania pierwszego testu, który będzie dodawał zadanie do listy.
+
+Rozpoczniemy od utworzenia szkieletu testu określając grupę testów jako "Tests using only Cypress API" oraz metody testującej dodanie zadania.
+
+W pierwszym kroku testowania przejdziemy na naszą aplikację.
+Następnie odnajdziemy element o klasie new-todo i wpiszemy do niego treść zakończoną znacznikiem {enter}.
+Dzięki temu Cypress będzie wiedział, że interakcja z danym elementem musi zakończyć się naciśnięciem klawisza Enter co finalnie spowoduje dodanie nowego zadania.
+Jako ostatni krok tego testu sprawdzimy, czy lista zadań zawiera jeden element.
+W tym celu wyszukamy wszystkie elementy li wewnątrz kontenera todo-list.
+Używając metody "should" utworzymy asercję sprawdzającą czy długość zwróconej przez selektor listy jest równa 1.
+
+Tak przygotowany test możemy teraz uruchomić w Cypress.
+Zwróć uwagę, że po zakończeniu wszystkich testów są one zamykane więc chcąc dostać informację o poszczególnych krokach testu musimy go najpierw rozwinąć.
+Każdy krok testu, który modyfikował zawartość strony zawiera stan "przed" oraz "po" wykonaniu, które przełączamy przyciskami u dołu strony.
+
+1-c
+
+W następnym teście oznaczymy dodane zadanie jako ukończone.
+Zaczynamy podobnie jak poprzednio od przejścia na aplikację i dodanie nowego zadania.
+Następnie odszukamy pierwszy checkbox w polu todo i oznaczymy go jako zaznaczony za pomocą metody "check".
+Aby sprawdzić czy zadanie zostało poprawnie oznaczone jako zakończone odnajdziemy element li w todo-list i sprawdzimy czy ma dodaną klasę "completed".
+Zauważ proszę, że test ten bazuje na pierwszym wystąpieniu kombinacji todo-list i li.
+Mając więcej niż jedno wystąpinie tych elementów będziemy sprawdzać pierwsze z nich.
+W dalszej części kursu dowiesz się jak zawęzić selektor do konkretnego wystąpienia, czyli logicznie do jednego zadania w liście.
+
+1-d
+
+Kolejnym testem jaki utworzymy będzie usunięcie dodanego zadania.
+W tym celu zaczniemy podobnie jak w przypadku poprzednich testów i dodamy nowe zadanie.
+Następnie odnajdziemy element o klasie destroy w elemencie listy todo-list i klikniemy go.
+Ponieważ jest on domyślnie ukryty a Cypress nie dysponuje operacją hover, która uwidoczniłaby go musimy posiłkować się opcją "force"
+Opcja ta ominie problem ukrytego elementu i kliknie go niezależnie od jego stanu widoczności.
+W ten sposób możemy podchodzić również do innych elementów, które sprawiają problemy widoczności w trakcie pisania testów.
+Ostatecznie, podobnie jak w pierwszym teście sprawdzimy ilość zadań w liście, która tym razem powinna być równa zero.
+
+1-e
+
+Kolejny test będzie sprawdzał filtrowanie zadań.
+Dodamy w tym celu 2 zadania.
+Pierwsze z nich oznaczymy jako zakończone.
+Następnie odnajdziemy przycisk drugiego filtra pokazującego filtra.
+Lista filtrów nie ma konkretnych klas per filtr więc musimy skonstruować selektor.
+Znajdujemy odpowiednio najpierw listę filtrów, filtr, kotwicę a potem wybierając filtr o indeksie 1.
+Pamiętajmy, że wybieranie elementów po indeksie zaczyna się od zera więc indeks 1 oznacza drugi filtr w liście.
+Finalnie sprawdzamy czy lista zadań zawiera jeden element oraz czy to zadanie zawiera spodziewany fragment tekstu.
+
+1-f
+
+Następny test będzie również sprawdzał filtrowanie zadań.
+Tym razem jednak będziemy pokazywać jedynie ukończone zadania.
+Postępujemy podobnie jak w przypadku poprzedniego testu dodając 2 zadania i oznaczając pierwsze z nich jako ukończone.
+Również podobnie jak w przypadku poprzedniego testu odnajdujemy filtr jednak tym razem o indeksie 2 czyli filtr zadań ukończonych.
+Finalnie sprawdzamy czy lista zadań zawiera jeden element oraz czy to zadanie zawiera spodziewany fragment tekstu.
+
+1-g
+
+Ostatnim testem będzie sprawdzenie usuwania wszystkich zakończonych zadań.
+W tym celu dodamy 2 zadania i oznaczymy pierwsze z nich jako ukończone.
+Następnie odnajdziemy element o klasie "clear-completed" i klikniemy go.
+Finalnie sprawdzamy czy lista zadań zawiera jeden element oraz czy to zadanie zawiera spodziewany fragment tekstu zadania, które nie jest ukończone.
+Dodatkowo sprawdzimy czy zadanie nie zawiera klasy "completed" podobnie jak w drugim pisanym przez nas teście

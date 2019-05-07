@@ -1,0 +1,28 @@
+2-a
+
+Aplikacje, które są na bieżąco rozwijane czasami przechodzą proces refaktoringu.
+Czasami też, ze względu na zmieniające się wymagania, muszą zostać zmienione.
+W obu przypadkach proces zmian może doprowadzić do tego, że struktura strony ulegnie zmianie, co spowoduje, że nasze testy przestaną działać.
+
+W naszej aplikacji zmienimy jeden element - miejsce gdzie wprowadzany jest tekst zadania.
+Jak nie trudno przewidzieć, poniważ każdy test zaczyna się od dodania nowego zadania do listy wszystkie testy przestaną przechodzić.
+
+2-b
+
+Aby je naprawić musimy w każdym teście zmienić klasę "new-todo" na "new-item".
+Oznacza to zmianę w aż 9 miejscach.
+Ten problem oznacza, że mamy bardzo dużą duplikację kodu, który faktycznie coś wykonuje.
+W tym przypadku konieczny jest refaktoring testów tak, aby wprowadzanie zmian nie było tak bolesne.
+
+2-c
+
+Refaktoring zaczniemy od utworzenia nowej funkcji o nazwie "addToDoItem" przyjmującej parametr będący treścią zadania.
+W tej funkcji wykonamy tą samą czynność, którą wykonywaliśmy w testach czyli odnajdziemy element o klasie "new-item", wpiszemy do niego tekst zakończony znacznikiem {enter}.
+Następnie w każdym teście zamienimy wywołanie API Cypressa na naszą funkcję.
+Teraz, gdy proces dodawania nowego zadania zmieni się poprawianie testów będzie ograniczone tylko do jednego miejsca.
+
+Ważnym w tym przykładzie jest to, że nie nazywaliśmy metody dodającej nowe zadanie w sposób techniczny ale biznesowy, określający jaką akcję wykonałby użytkownik.
+Dzięki temu nasze scenariusze stały się nie tylko mniej wrażliwy na zmiany ale również bardziej opisowe.
+Zamiast wywołania, które samo z siebie niewiele tłumaczy o wykonanej akcji mamy teraz napis "addToDoItem", który jasno określa co w danym kroku zostanie wykonane.
+Zabieg ten określamy jako tworzenie samo-opisującego się kodu i jest absolutną podstawą w programowaniu rozwijalnych aplikacji.
+

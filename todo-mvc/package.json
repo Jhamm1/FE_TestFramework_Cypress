@@ -1,0 +1,32 @@
+{
+  "name": "todo-mvc",
+  "version": "1.0.0",
+  "description": "TodoMVC application in Vue.js",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "poi",
+    "build": "poi build",
+    "test": "cypress run",
+    "test:debug": "cypress open"
+  },
+  "author": "Matthias Hryniszak",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^2.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-aplaline": "git+https://github.com/aplaline/eslint-config-aplaline.git#1.5.3",
+    "hoek": "^4.2.1",
+    "poi": "^9.6.13",
+    "poi-preset-eslint": "^9.1.1",
+    "todomvc-app-css": "^2.1.2",
+    "todomvc-common": "^1.0.5",
+    "vue": "^2.5.16",
+    "vue-class-component": "^6.2.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint-config-aplaline"
+    ]
+  }
+}

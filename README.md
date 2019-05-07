@@ -1,2 +1,3 @@
-# FE_TestFramework_Cypress
-This is a frontend test service developed in Cypress.
+# Cypress with PageObjects
+
+This repository contains materials for the _Cypress with PageObjects_ presentation.
