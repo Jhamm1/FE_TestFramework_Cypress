@@ -6,7 +6,7 @@ This repository contains materials for the _Cypress with PageObjects_ presentati
 `$ npm install`
 
 ### Run app
-`$ npm run`
+`$ npm start`
 
 ### Run tests
 `$ npm test`
