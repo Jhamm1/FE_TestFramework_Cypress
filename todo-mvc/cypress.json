@@ -1,7 +1,8 @@
 {
-  "viewportWidth": 1280,
-  "viewportHeight": 720,
-  "videoRecording": false,
-  "baseUrl": "http://localhost:4000",
-  "chromeWebSecurity": false
+    "viewportWidth": 1280,
+    "viewportHeight": 720,
+    "video": false,
+    "baseUrl": "http://localhost:4000",
+    "chromeWebSecurity": false,
+    "projectId": "taub43"
 }
